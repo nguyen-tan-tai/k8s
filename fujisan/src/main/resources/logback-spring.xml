@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Include Spring Boot's default logging configurations -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- Define a Logstash JSON Console Appender -->
+    <appender name="LOGSTASH_JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <!-- Spring Micrometer MDC Keys -->
+            <includeMdcKeyName>traceId</includeMdcKeyName>
+            <includeMdcKeyName>spanId</includeMdcKeyName>
+            <!-- OpenTelemetry Java Agent MDC Keys -->
+            <includeMdcKeyName>trace_id</includeMdcKeyName>
+            <includeMdcKeyName>span_id</includeMdcKeyName>
+            <includeMdcKeyName>trace_flags</includeMdcKeyName>
+        </encoder>
+    </appender>
+
+    <!-- Use plain text for local development, but switch to JSON when requested via spring profiles (optional), 
+         or just force JSON generally. We will force JSON here to ensure log shipping systems pick it up easily. -->
+    <root level="INFO">
+        <!-- Switch to standard CONSOLE if you don't want JSON locally -->
+        <appender-ref ref="LOGSTASH_JSON" />
+    </root>
+
+    <!-- Example of keeping Spring framework logs slightly quieter -->
+    <logger name="org.springframework" level="INFO" />
+    <logger name="com.example.demo" level="DEBUG" />
+</configuration>
