@@ -6,9 +6,6 @@
     <!-- Define a Logstash JSON Console Appender -->
     <appender name="LOGSTASH_JSON" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <!-- Spring Micrometer MDC Keys -->
-            <includeMdcKeyName>traceId</includeMdcKeyName>
-            <includeMdcKeyName>spanId</includeMdcKeyName>
             <!-- OpenTelemetry Java Agent MDC Keys -->
             <includeMdcKeyName>trace_id</includeMdcKeyName>
             <includeMdcKeyName>span_id</includeMdcKeyName>

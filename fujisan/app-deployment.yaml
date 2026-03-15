@@ -13,11 +13,6 @@ spec:
     metadata:
       labels:
         app: fujisan-demo
-      annotations:
-        # These annotations tell Prometheus to automatically scrape metrics from this pod
-        prometheus.io/scrape: "true"
-        prometheus.io/path: "/actuator/prometheus"
-        prometheus.io/port: "8080"
     spec:
       containers:
       - name: spring-boot-app

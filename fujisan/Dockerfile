@@ -25,7 +25,7 @@ EXPOSE 8080
 # Configure the environment to point to observability endpoints if needed
 ENV OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317
 ENV OTEL_SERVICE_NAME=demo-app
-ENV OTEL_METRICS_EXPORTER=none # If you want Spring Boot Micrometer to handle metrics instead
+ENV OTEL_METRICS_EXPORTER=otlp
 
 # Execute the application
 ENTRYPOINT ["java", "-javaagent:opentelemetry-javaagent.jar", "-jar", "app.jar"]
