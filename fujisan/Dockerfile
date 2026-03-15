@@ -25,8 +25,10 @@ EXPOSE 8080
 # Configure the environment to point to observability endpoints if needed
 # We must use http://tempo:4318 for OTLP HTTP because 4317 is for gRPC
 ENV OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4318
+# Tell the agent to ONLY export traces to Tempo, because Tempo DOES NOT accept metrics or logs!
+ENV OTEL_METRICS_EXPORTER=none
+ENV OTEL_LOGS_EXPORTER=none
 ENV OTEL_SERVICE_NAME=demo-app
-ENV OTEL_METRICS_EXPORTER=otlp
 
 # Execute the application
 ENTRYPOINT ["java", "-javaagent:opentelemetry-javaagent.jar", "-jar", "app.jar"]
