@@ -23,7 +23,8 @@ COPY --from=builder /build/target/*.jar app.jar
 EXPOSE 8080
 
 # Configure the environment to point to observability endpoints if needed
-ENV OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4317
+# We must use http://tempo:4318 for OTLP HTTP because 4317 is for gRPC
+ENV OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4318
 ENV OTEL_SERVICE_NAME=demo-app
 ENV OTEL_METRICS_EXPORTER=otlp
 
